@@ -1,91 +1,91 @@
 CREATE TABLE Persona
 (
     DNI INT PRIMARY KEY,
-    Nommbre VARCHAR(30),
-    ApellidoPaterno VARCHAR(30),
-    ApellidoMaterno VARCHAR(30),
-    Telefono INT
+    Nommbre VARCHAR2(30),
+    ApellidoPaterno VARCHAR2(30),
+    ApellidoMaterno VARCHAR2(30),
+    Telefono NUMBER
 );
 
 CREATE TABLE Empleado
 (
-    ID_Empleado INT,
-    DNI INT,
+    ID_Empleado NUMBER,
+    DNI NUMBER,
     PRIMARY KEY (ID_Empleado,DNI),
     FOREIGN KEY (DNI) REFERENCES Persona(DNI)
 );
 
 CREATE TABLE Vendedor
 (
-    ID_Vendedor INT,
-    DNI INT,
+    ID_Vendedor NUMBER,
+    DNI NUMBER,
     PRIMARY KEY (ID_Vendedor,DNI),
     FOREIGN KEY (DNI) REFERENCES Persona(DNI)
 );
 
-CREATE TABLE CLIENTE
+CREATE TABLE Cliente
 (
-    ID_Cliente INT,
-    DNI INT,
+    ID_Cliente NUMBER,
+    DNI NUMBER,
     PRIMARY KEY (ID_Cliente,DNI),
     FOREIGN KEY (DNI) REFERENCES Persona(DNI)
 );
 
 CREATE TABLE Pedido
 (
-    ID_Pedido INT PRIMARY KEY,
-    Precio REAL,
-    Talla VARCHAR(2),
-    Color VARCHAR(30),
-    Cantidad INT,
-    ID_Cliente INT,
+    ID_Pedido NUMBER PRIMARY KEY,
+    Precio NUMBER(3,2),
+    Talla VARCHAR2,
+    Color VARCHAR2(30),
+    Cantidad NUMBER,
+    ID_Cliente NUMBER,
     FOREIGN KEY (ID_Cliente) REFERENCES Cliente(ID_Cliente)
 );
 
 CREATE TABLE Polo
 (
-    ID_Polo INT,
-    ID_Pedido INT,
+    ID_Polo NUMBER,
+    ID_Pedido NUMBER,
     PRIMARY KEY (ID_Polo,ID_Pedido),
     FOREIGN KEY (ID_Pedido) REFERENCES Pedido(ID_Pedido)
 );
 
 CREATE TABLE Casaca
 (
-    ID_Casaca INT,
-    ID_Pedido INT,
+    ID_Casaca NUMBER,
+    ID_Pedido NUMBER,
     PRIMARY KEY (ID_Casaca,ID_Pedido),
     FOREIGN KEY (ID_Pedido) REFERENCES Pedido(ID_Pedido)
 );
 
 CREATE TABLE Polera
 (
-    ID_Polera INT,
-    ID_Pedido INT,
+    ID_Polera NUMBER,
+    ID_Pedido NUMBER,
     PRIMARY KEY (ID_Polera,ID_Pedido),
     FOREIGN KEY (ID_Pedido) REFERENCES Pedido(ID_Pedido)
 );
 
 CREATE TABLE Pago
 (
-    ID_Pago INT PRIMARY KEY,
-    Monto REAL,
+    ID_Pago NUMBER PRIMARY KEY,
+    Monto NUMBER(3,2),
     FechaPago DATE,
-    ID_Cliente INT,
-    ID_Pedido INT,
+    ID_Cliente NUMBER,
+    ID_Pedido NUMBER,
     FOREIGN KEY (ID_Cliente) REFERENCES Cliente(ID_Cliente),
     FOREIGN KEY (ID_Pedido) REFERENCES Pedido(ID_Pedido),
 );
 
 CREATE TABLE Notificacion
 (
-    ID_Notificacion INT PRIMARY KEY,
-    Tipo VARCHAR(30),
-    Descripcion VARCHAR(100),
-    ID_Pedido INT,
-    ID_Empleado INT,
-    ID_Vendedor INT,
-    ID_Pago INT,
+    ID_Notificacion NUMBER PRIMARY KEY,
+    Tipo VARCHAR2(30),
+    Descripcion VARCHAR2(100),
+    ID_Pedido NUMBER,
+    ID_Empleado NUMBER,
+    ID_Vendedor NUMBER,
+    ID_Pago NUMBER,
     FOREIGN KEY (ID_Pedido) REFERENCES Pedido(ID_Pedido),
     FOREIGN KEY (ID_Empleado) REFERENCES Empleado(ID_Empleado),
     FOREIGN KEY (ID_Vendedor) REFERENCES Vendedor(ID_Vendedor),
